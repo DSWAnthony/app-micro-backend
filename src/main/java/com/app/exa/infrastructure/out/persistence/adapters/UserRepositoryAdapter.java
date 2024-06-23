@@ -6,6 +6,7 @@ import com.app.exa.domain.models.Respon;
 import com.app.exa.domain.models.User;
 import com.app.exa.infrastructure.out.persistence.mappers.UserMapper;
 import com.app.exa.infrastructure.out.persistence.repositorys.UserRepository;
+import com.app.exa.keycloak.service.KeycloakUserService;
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserRepositoryAdapter implements UserRepositoryPort {
+    @Inject
+    KeycloakUserService keycloakServices;
     @Inject
     UserRepository userRepository;
 
@@ -32,6 +35,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @WithSession
     public Uni<User> createUser(User user) {
         UserEntity userEntity = UserMapper.domainToEntity(user);
+        keycloakServices.createUser(user);
         return userRepository.persistAndFlush(userEntity)
                 .map(UserMapper::entityToDomain);
     }

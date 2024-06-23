@@ -11,6 +11,8 @@ public class UserMapper {
         user.setNames(userEntity.getNames());
         user.setEmail(userEntity.getEmail());
         user.setPassword(userEntity.getPassword());
+        user.setUser(userEntity.getUser());
+        user.setLastName(userEntity.getLastName());
         if (userEntity.getFavorites() != null){
             user.setFavorites(userEntity.getFavorites().stream().map(FavoriteMapper::entityToDomain).toList());
         }
@@ -22,6 +24,8 @@ public class UserMapper {
         userEntity.setId(user.getId());
         userEntity.setNames(user.getNames());
         userEntity.setEmail(user.getEmail());
+        userEntity.setUser(user.getUser());
+        userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
         return userEntity;
     }

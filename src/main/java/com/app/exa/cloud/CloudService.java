@@ -14,8 +14,6 @@ public class CloudService {
     @Inject
     Cloudinary cloudinary;
 
-
-
     public Map uploadPdf(String filePath) {
         CloudConfig cloudConfig = new CloudConfig();
         cloudinary = cloudConfig.cloudinary();

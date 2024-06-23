@@ -8,9 +8,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "user")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +17,14 @@ public class UserEntity {
     @Column(name = "names", nullable = false)
     private String names;
 
+    @Column(name = "lastnames", nullable = false)
+    private String lastName;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "user", nullable = false)
+    private String user;
 
     @Column(name = "password", nullable = false)
     private String password;
